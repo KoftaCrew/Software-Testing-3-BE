@@ -13,6 +13,14 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    /**
+     * This method is used to initialize the todoService object
+     * its purpose is to reset the todos list in order to test the methods independently
+     *
+     */
+    public void resetTodoService() {
+        todoService = new TodoServiceImpl();
+    }
     @PostMapping("/create")
     public ResponseEntity<Todo> create(@RequestBody TodoCreateRequest todo) {
         try {

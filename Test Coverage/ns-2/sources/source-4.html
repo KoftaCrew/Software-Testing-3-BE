@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TodoServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fcai.SoftwareTesting.todo</a>
+</div>
+
+<h1>Coverage Summary for Class: TodoServiceImpl (com.fcai.SoftwareTesting.todo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TodoServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95%
+  </span>
+  <span class="absValue">
+    (38/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.fcai.SoftwareTesting.todo;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import org.springframework.stereotype.Service;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">6</i>&nbsp;import java.util.List;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;@Service
+<i class="no-highlight">9</i>&nbsp;public class TodoServiceImpl implements TodoService {
+<i class="no-highlight">10</i>&nbsp;    private static List&lt;Todo&gt; todos;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    public TodoServiceImpl() {</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        todos = new ArrayList&lt;Todo&gt;();</b>
+<i class="no-highlight">15</i>&nbsp;    }
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    @Override
+<i class="no-highlight">18</i>&nbsp;    public Todo create(TodoCreateRequest todo) {
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        if (todo == null) {</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo cannot be null&quot;);</b>
+<i class="no-highlight">21</i>&nbsp;        }
+<i class="no-highlight">22</i>&nbsp;
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        if (todo.getTitle().isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo title cannot be empty&quot;);</b>
+<i class="no-highlight">25</i>&nbsp;        }
+<i class="no-highlight">26</i>&nbsp;
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        if (todo.getDescription().isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo description cannot be empty&quot;);</b>
+<i class="no-highlight">29</i>&nbsp;        }
+<i class="no-highlight">30</i>&nbsp;
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        String id = String.valueOf(todos.size() + 1);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        Todo newTodo = new Todo(</b>
+<i class="no-highlight">33</i>&nbsp;                id,
+<b class="fc"><i class="no-highlight">34</i>&nbsp;                todo.getTitle(),</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;                todo.getDescription(),</b>
+<i class="no-highlight">36</i>&nbsp;                false
+<i class="no-highlight">37</i>&nbsp;        );
+<i class="no-highlight">38</i>&nbsp;
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        todos.add(newTodo);</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        return newTodo;</b>
+<i class="no-highlight">42</i>&nbsp;    }
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    @Override
+<i class="no-highlight">45</i>&nbsp;    public Todo read(String id) {
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        if (id == null) {</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo id cannot be null&quot;);</b>
+<i class="no-highlight">48</i>&nbsp;        }
+<i class="no-highlight">49</i>&nbsp;
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        if (id.isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo id cannot be empty&quot;);</b>
+<i class="no-highlight">52</i>&nbsp;        }
+<i class="no-highlight">53</i>&nbsp;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        Todo todo = null;</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        for (int i = 0; i &lt; todos.size(); i++) {</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            if (todos.get(i).getId().equals(id)) {</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;                todo = todos.get(i);</b>
+<i class="no-highlight">58</i>&nbsp;            }
+<i class="no-highlight">59</i>&nbsp;        }
+<i class="no-highlight">60</i>&nbsp;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        if (todo == null) {</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo not found&quot;);</b>
+<i class="no-highlight">63</i>&nbsp;        }
+<i class="no-highlight">64</i>&nbsp;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        return todo;</b>
+<i class="no-highlight">66</i>&nbsp;    }
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;    @Override
+<i class="no-highlight">69</i>&nbsp;    public Todo update(String id, boolean completed) {
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        Todo todo = read(id);</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        todo.setCompleted(completed);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        return todo;</b>
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;    @Override
+<i class="no-highlight">76</i>&nbsp;    public void delete(String id) {
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        Todo todo = read(id);</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        todos.remove(todo);</b>
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    @Override
+<i class="no-highlight">82</i>&nbsp;    public List&lt;Todo&gt; list() {
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        if (todos == null) {</b>
+<b class="nc"><i class="no-highlight">84</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo list cannot be null&quot;);</b>
+<i class="no-highlight">85</i>&nbsp;        }
+<i class="no-highlight">86</i>&nbsp;
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        return todos;</b>
+<i class="no-highlight">88</i>&nbsp;    }
+<i class="no-highlight">89</i>&nbsp;
+<i class="no-highlight">90</i>&nbsp;    @Override
+<i class="no-highlight">91</i>&nbsp;    public List&lt;Todo&gt; listCompleted() {
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        if (todos == null) {</b>
+<b class="nc"><i class="no-highlight">93</i>&nbsp;            throw new IllegalArgumentException(&quot;Todo list cannot be null&quot;);</b>
+<i class="no-highlight">94</i>&nbsp;        }
+<i class="no-highlight">95</i>&nbsp;
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        List&lt;Todo&gt; completedTodos = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        for (int i = 0; i &lt; todos.size(); i++) {</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;            if (todos.get(i).isCompleted()) {</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;                completedTodos.add(todos.get(i));</b>
+<i class="no-highlight">100</i>&nbsp;            }
+<i class="no-highlight">101</i>&nbsp;        }
+<i class="no-highlight">102</i>&nbsp;
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        return completedTodos;</b>
+<i class="no-highlight">104</i>&nbsp;    }
+<i class="no-highlight">105</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-21 01:18</div>
+</div>
+</body>
+</html>
